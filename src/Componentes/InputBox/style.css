@@ -1,0 +1,51 @@
+:root {
+    --inputColor: #23262B;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    min-height: 50px;
+    position: relative;
+}
+
+.inputBox > label {
+    position: absolute;
+    top: 0;
+    left: 2px;
+    font-size: var(--fontSize);
+    color: rgb(216, 216, 216);
+}
+
+.inputBox > input {
+    background-color: var(--inputColor);
+    border: 1px solid var(--boxBorda);
+    height: 27px;
+    outline: 0;
+    border-radius: 3px;
+    padding-left: 5px;
+    color: #fff;
+}
+
+.inputBox > input:focus {
+    border-color: var(--activeColor);
+}
+
+.inputBox input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input.invalid {
+  border-color: red !important;
+}
+
+.inputBox.boxBotoes {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 10px;
+    bottom:10px;
+    right: 10px;
+}

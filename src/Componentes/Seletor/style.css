@@ -1,0 +1,14 @@
+.situacao {
+    background-color: #1C2025;
+    border-radius: 3px;
+}
+
+.situacao:hover {
+    /*outline: 1px solid #3399FF;*/
+    border-color: #3399FF;
+}
+
+.situacao:focus {
+    border-color: red;
+    outline-color: yellow;
+}

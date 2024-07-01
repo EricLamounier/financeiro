@@ -1,0 +1,68 @@
+.tabela {
+	width: 100%;
+	background-color: rgba(121, 121, 121, 0);
+	font-size: var(--fontSize);
+}
+
+.tabela div {
+	display: flex;
+}
+
+.tabela .row {
+	background-color: #202732;
+	border: 1px solid var(--boxBorda);
+	padding: 10px 7px;
+	display: flex;
+}
+
+.tabela .tipo.row,
+.tabela .tabelaHeader.row  {
+	margin-bottom: 1px;
+	font-size: 12px;
+	padding: 2px 7px;
+	background-color: #181d25;
+	font-weight: bold;
+}
+
+.tabela .body {
+	flex-direction: column;
+	gap: 1.5px;
+	margin: 5px 0 1.5px 0;
+}
+
+.tabela p:nth-child(n + 2) {
+	border-left: 1px solid var(--boxBorda);
+	padding-left: 8px;
+}
+
+.tabela .row p:nth-child(1) {
+    --contaSize: 42%;
+    width: var(--contaSize);
+}
+
+.tabela .row p:nth-child(2) {
+    --dataSize: 21%;
+    width: var(--dataSize);
+}
+
+.tabela .row p:nth-child(3) {
+    --situacaoSize: 17%;
+    width: var(--situacaoSize);
+}
+
+.tabela .row p:nth-child(4) {
+    --valorSize: 20%;
+    width: var(--valorSize);
+}
+
+.total .totalRow {
+    width: calc(80% + 35px) !important;
+}
+
+.tabela .sit0 {
+	color: rgb(241, 233, 114);
+}
+
+.tabela .sit1 {
+	color: rgb(197, 236, 139);
+}

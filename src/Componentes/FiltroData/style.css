@@ -1,0 +1,16 @@
+.dataForm {
+    width: calc(100% - 1px);
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.dataForm .dataIcon {
+    background-color: #43A1FF;
+    border: 1px solid #123d68;
+    transition: 0.05s;
+}
+
+.dataForm .dataIcon:active {
+    background-color: #2169b1;
+}

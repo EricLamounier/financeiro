@@ -1,0 +1,74 @@
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.781);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalTitulo {
+    position: absolute;
+    width: calc(100% - 70px);
+    top: 10px;
+    left: 10px;
+    border-bottom: 1px solid gray;
+}
+
+label.inputRadio {
+    position: relative;
+    padding-left: 20px;
+}
+
+label.inputRadio::before {
+    --sizeCheckbox: 11px;
+    content: '';
+    width: var(--sizeCheckbox);
+    height: var(--sizeCheckbox);
+    position: absolute;
+    left: 0;
+    top: calc(var(--sizeCheckbox)/2);
+    border: 1px solid #434D5B;
+    background: #1C2025;
+    box-shadow: inset 2px 2px 3px #181b1f, inset -2px -2px 3px #20252b;
+}
+
+label.inputRadio::after {
+    display: none;
+    --sizeCheckbox: 9px;
+    content: '';
+    width: var(--sizeCheckbox);
+    height: var(--sizeCheckbox);
+    position: absolute;
+    top: 7.1px;
+    left: 1.6px;
+    border-radius: 0px;
+    background: linear-gradient(145deg, #55d3da, #47b1b8);
+}
+
+input[type="radio"]:checked + label.inputRadio::after {
+    display: block;
+}
+
+.modalBox {
+    width: 70%;
+    background-color: #101316;
+    color: #fff;
+    padding: 50px;
+    position: relative;
+    padding-bottom: 70px;
+    border: 1px solid var(--boxBorda);
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px #4b53616b;
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

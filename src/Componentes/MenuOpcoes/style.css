@@ -1,0 +1,35 @@
+.menuOpt {
+    transition: 0.01s;
+}
+
+.menuOpt .icon.false,
+.menuOpt .label.false{
+    color: #A7A7A7
+} 
+
+.menuOpt.true,
+.icon.true {
+    color: var(--activeColor)
+}
+
+.menuOpt .circle.true {
+    background-color: var(--activeColor)
+}
+
+.menuOpt:active {
+    background-color: rgba(0, 0, 0, 0.103);
+}
+
+.menuOpt.true {
+    background-color: rgba(0, 0, 0, 0.103);
+}
+
+.menuOpt .iconBox {
+    text-align: center;
+}
+
+.menuOpt .circle {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}

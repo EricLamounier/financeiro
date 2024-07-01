@@ -1,0 +1,73 @@
+.button {
+    width: 40px;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button.salvar {
+    background-color: #43A1FF;
+    color: #fff;
+    border-color: #43A1FF;
+    border-top-width: 2px;
+    border-top-color: #6da1d4;
+}
+
+.button.salvar {
+    background-color: #43A1FF;
+    color: #fff;
+    border-color: #43A1FF;
+    border-top-width: 2px;
+    border-top-color: #6da1d4;
+}
+
+.button.excluir {
+    background-color: #ff4800;
+    color: #fff;
+    border-color: #ff0000;
+    border-top-width: 2px;
+    border-top-color: #d46d6d;
+}
+
+.button.cancelar {
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: 0;
+}
+
+.button.adicionar {
+    background-color: #43A1FF;
+    color: #fff;
+    position: fixed;
+    bottom: 100px;
+    right: 10px;
+    border-color: #a9dfff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.button.salvar:active {
+    background-color: #0169d1;
+    border-top-color: #0169d1;
+}
+
+.button.excluir:active {
+    background-color: #b90000;
+    border-top-color: #b90000;
+}
+
+.button.cancelar:active {
+    background-color: #b9b9b9;
+}

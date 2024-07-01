@@ -1,0 +1,60 @@
+.header {
+    background-color: var(--boxCor);
+    border: 1px solid var(--boxBorda);
+    margin-bottom: 10px;
+    border-radius: 3px;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.header .infoPessoa {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--boxBorda);
+    padding: 3px 0px
+}
+
+.header .infoPessoa .graphIcon {
+    background-color: #43A1FF;
+    border: 1px solid #07396b;
+    border-radius: 2px;
+}
+
+.header .contas {
+    display: flex;
+}
+
+.header .contas div {
+    width: 50%;
+}
+
+.header .receitas,
+.header .despesas {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header .receitas .tipoConta,
+.header .despesas .tipoConta {
+    font-size: var(--fontSize);
+}
+
+.header .receitas.icon,
+.header .despesas.icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.header .receitas.icon {
+    background-color: #5EC26A;
+}
+
+.header .despesas.icon {
+    background-color: #E34F5B;
+}

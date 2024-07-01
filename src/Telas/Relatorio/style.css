@@ -1,0 +1,50 @@
+.relatorio {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.divCalculo {
+    background-color: var(--boxCor);
+    padding: 10px;
+    border-radius: 3px;
+    font-size: var(--fontSize);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--boxBorda);
+}
+
+.divCalculo > div:nth-child(1){
+    width: 70%;
+}
+
+.divCalculo > div:nth-child(2){
+    width: 30%;
+}
+
+.divCalculoModos {
+    display: flex;
+    gap: 10px;
+}
+
+.divCalculoModos input {
+    margin: 0;
+}
+
+
+.divCalculoModos > div {
+    display: flex;
+    gap: 5px;
+}
+
+.divCalculo .divCalculoNome {
+    border-bottom: 1px solid #fff;
+    margin-bottom: 5px;
+}
+
+.divCalculo .graphIcon {
+    background-color: #43A1FF;
+    padding: 2px;
+    border-radius: 2px;
+}

@@ -1,0 +1,65 @@
+.pessoaBox {
+    --pessoaBoxPadding: 6px;
+    background-color: var(--boxCor);
+    border: 1px solid var(--boxBorda);
+    width: calc(100% - var(--pessoaBoxPadding) * 2);
+    min-height: 70px;
+    padding: var(--pessoaBoxPadding);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: var(--borderRadius);
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.pessoaBox .pessoaImagem {
+    --sizePessoaImagem: 50px;
+    border-radius: 50%;
+    width: var(--sizePessoaImagem);
+    height: var(--sizePessoaImagem);
+    background-color: #23262B;
+    border: 1px solid var(--boxBorda);
+    overflow: hidden;
+}
+
+.pessoaBox .perfil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pessoaBox .pessoaInfo {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: c;
+    gap: 10px;
+}
+
+.pessoaBox .pessoaTotais {
+    display: flex;
+    gap: 10px;
+}
+
+.pessoaBox .tipoConta {
+    font-size: var(--fontSize);
+}
+
+.pessoaBox .pessoaTotalBox {
+    background-color: #3A4352;
+    padding: 3px;
+    min-width: 80px;
+    border-radius: 3px;
+}
+
+.pessoaBox .valor {
+    font-size: var(--fontSize);
+}
+
+.pessoaBox .pessoaArrowIcon {
+    position: absolute;
+    right: 3px;
+
+}

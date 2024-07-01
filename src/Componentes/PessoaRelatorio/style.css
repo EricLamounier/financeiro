@@ -1,0 +1,45 @@
+.relatorio .pessoa {
+    background-color: var(--boxCor);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid var(--boxBorda);
+    border-radius: 3px;
+}
+
+.relatorio .pessoa .pessoaNome {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border-bottom: 1px solid #fff;
+}
+
+
+.relatorio .pessoa .div {
+    background-color: #3A4352;
+    border: 1px solid #89929E;
+    margin-top: -1px;
+    font-size: var(--fontSize);
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.relatorio .pessoa .div p:nth-child(1) {
+    padding-left: 10px;
+}
+
+.relatorio .pessoa.show-false {
+    height: 30px;
+}
+
+.relatorio .arrowIconRelPessoa {
+    transition: 0.2s;
+}
+
+.relatorio .pessoa.show-true .arrowIconRelPessoa {
+    transform: rotate(180deg);
+}

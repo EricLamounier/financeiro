@@ -1,0 +1,34 @@
+:root {
+  --boxCor: #202732;
+  --boxBorda: #434D5B;
+  --borderRadius: 3px;
+  left: 10px;
+  top: 5px;
+  --activeColor: #43A1FF;
+  --fontSize: 14px;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  background-color: #333A46;
+  height: 100vh;
+  color: #fff;
+}
+
+p {
+  margin: 0;
+}
+
+a, a:focus, a:active,
+button, button:focus, button:active {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
