@@ -31,7 +31,7 @@ export default function Consulta() {
     useEffect(() => {
         setLoading(true)
         try {
-            axios.get(`https://financeiro-backend.vercel.app/api/conta/get/${pessoa.id}`, {
+            axios.get(`http://192.168.3.9:3000/api/conta/get/${pessoa.id}`, {
                 headers: {
                     'bypass-tunnel-reminder': 5465,
                 },
@@ -43,6 +43,7 @@ export default function Consulta() {
             });
         } catch (err) {
             console.log(err);
+            setLoading(false)
         }
     }, []);
 
@@ -119,6 +120,8 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
     const [base64, setBase64Image] = useState(null);
     const navigate = useNavigate()
 
+    console.log(pessoa)
+
     const handleSave = () => {
     
         setLoading(true);
@@ -128,34 +131,39 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
             imagem: previewImage.split(',')[previewImage.split(',').length-1]
         };
 
-        axios.put('https://financeiro-backend.vercel.app/api/pessoa/put/' + pessoa.id, _data, {
+        axios.put('http://192.168.3.9:3000/api/pessoa/put/' + pessoa.id, _data, {
             headers: {
                 'bypass-tunnel-reminder': 5465,
             },
         })
             .then((res) => {
-                setPessoa(res.data[0]);
+                setPessoa(res.data);
                 setModal(false);
                 setLoading(false);
             })
             .catch((err) => {
                 console.log(err.response.data);
                 setLoading(false);
+                
             });
+
     };
 
     const handleDelete = () => {
+        setLoading(true)
         try{
-            axios.delete('https://financeiro-backend.vercel.app/api/pessoa/delete/' + pessoa.id, {
+            axios.delete('http://192.168.3.9:3000/api/pessoa/delete/' + pessoa.id, {
                 headers: {
                     'bypass-tunnel-reminder': 5465,
                 },
             })
             .then((res)=>{
                 navigate('/')
+                setLoading(false);
             })
         }catch(err){
             console.log(err)
+            setLoading(false);
         }
     }
 

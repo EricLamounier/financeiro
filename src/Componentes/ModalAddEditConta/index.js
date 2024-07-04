@@ -41,7 +41,7 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
 
         if (dados.tipo) {
             try {
-                axios.put(`https://financeiro-backend.vercel.app/api/conta/put/${dados.conta.id}`, _data, {
+                axios.put(`http://192.168.3.9:3000/api/conta/put/${dados.conta.id}`, _data, {
                     headers: {
                         'bypass-tunnel-reminder': 5465,
                     },
@@ -54,10 +54,11 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
                 });
             } catch (err) {
                 console.log(err);
+                setLoading(false)
             }
         } else {
             try {
-                axios.post('https://financeiro-backend.vercel.app/api/conta/post', _data, {
+                axios.post('http://192.168.3.9:3000/api/conta/post', _data, {
                     headers: {
                         'bypass-tunnel-reminder': 5465,
                     },
@@ -69,6 +70,7 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
                 });
             } catch (err) {
                 console.log(err);
+                setLoading(false)
             }
         }
     };
@@ -76,7 +78,7 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
     const handleDelete = () => {
         setLoading(true)
         try {
-            axios.delete(`https://financeiro-backend.vercel.app/api/conta/delete/${dados.conta.id}`, {
+            axios.delete(`http://192.168.3.9:3000/api/conta/delete/${dados.conta.id}`, {
                 headers: {
                     'bypass-tunnel-reminder': 5465,
                 },
@@ -89,6 +91,7 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
             });
         } catch (err) {
             console.log(err);
+            setLoading(false)
         }
     };
 

@@ -9,6 +9,7 @@ import {formattedNumber } from '../Funcoes'
 
 export default function Header({contas, pessoa, setEditPessoa}){
 
+    //console.log(pessoa)
     const [totalReceitas, setTotalReceitas] = useState(0)
     const [totalDespesas, setTotalDespesas] = useState(0)
     useEffect(()=>{

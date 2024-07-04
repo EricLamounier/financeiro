@@ -24,7 +24,7 @@ export default function Dividido() {
     useEffect(() => {
         setLoading(true)
         try {
-            axios.get('https://financeiro-backend.vercel.app/api/conta/get',{
+            axios.get('http://192.168.3.9:3000/api/conta/get',{
                 headers: {
                     'bypass-tunnel-reminder': 5465,
                 },
@@ -35,6 +35,7 @@ export default function Dividido() {
             });
         } catch (err) {
             console.log(err);
+            setLoading(false)
         }
     }, []);
 
