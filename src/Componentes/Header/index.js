@@ -28,7 +28,7 @@ export default function Header({contas, pessoa, setEditPessoa}){
     return (
         <div className='header'>
             <div className='infoPessoa'>
-                <p className='nomePessoa'>{pessoa.nome}</p>
+                <p className='nomePessoa'>{pessoa.nome || ''}</p>
                 <ModeEditOutlineOutlinedIcon className='graphIcon' onClick={()=>setEditPessoa(true)} />
             </div>
             <div className='contas'>

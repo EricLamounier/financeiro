@@ -19,7 +19,7 @@ export function PessoaBox({pessoa}){
                 <img className='perfil' src={`data:image/png;base64,${pessoa.imagem}`} alt='imagem perfil' />
             </div>
             <div className='pessoaInfo'>
-                <p className='pessoaNome'>{pessoa.nome}</p>
+                <p className='pessoaNome'>{pessoa.nome || ''}</p>
                 {/*<div className='pessoaTotais'>
                     <div className='pessoaTotalReceita pessoaTotalBox'>
                         <p className='tipoConta'>Receitas:</p>

@@ -53,7 +53,7 @@ export default function PessoaRelatorio({ dados, totalDividido, totalReceitas, m
     return (
         <div className={`pessoa show-${show}`}>
             <div className='pessoaNome' onClick={handleShow}>
-                <p>{dados.pessoa.nome}</p>
+                <p>{dados.pessoa.nome || ''}</p>
                 <KeyboardArrowDownIcon className='arrowIconRelPessoa' />
             </div>
 

@@ -86,7 +86,7 @@ export default function TabelaConsulta({ contas, setModal, isDivididoModo}) {
                 {
                     receitas.map((receita, idx)=>(
                         <div className='row' key={idx} onClick={()=>setModal({titulo: 'Editar Conta', tipo: 1, conta: receita})} >
-                            <p>{receita.nome}</p>
+                            <p>{receita.nome || ''}</p>
                             <p>{formateData(receita.data)}</p>
                             <p className={`sit${receita.situacao}`}>{Number(receita.situacao) ? 'Recebido' : 'Pendente'}</p>
                             <p>R$ <span>{formattedNumber(receita.valor)}</span></p>
@@ -113,7 +113,7 @@ export default function TabelaConsulta({ contas, setModal, isDivididoModo}) {
             {
                 despesas.map((despesa, idx)=>(
                     <div className='row' key={idx} onClick={()=>setModal({titulo: 'Editar Conta', tipo: 1, conta: despesa})} >
-                        <p>{despesa.nome}</p>
+                        <p>{despesa.nome || ''}</p>
                         <p>{formateData(despesa.data)}</p>
                         <p className={`sit${despesa.situacao}`}>{Number(despesa.situacao) ? 'Pago' : 'Pendente'}</p>
                         <p>R$ <span>{formattedNumber(despesa.valor)}</span></p>
