@@ -2,7 +2,7 @@
   "theme_color": "#1d2125",
   "background_color": "#1d2125",
   "display": "fullscreen",
-  "orientation": "landscape",
+  "orientation": "portrait",
   "scope": "https://financeiro-psi.vercel.app/",
   "start_url": "https://financeiro-psi.vercel.app/",
   "name": "Financeiro EG",
