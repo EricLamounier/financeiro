@@ -31,7 +31,7 @@ export default function Consulta() {
     useEffect(() => {
         setLoading(true)
         try {
-            axios.get(`http://192.168.3.9:3000/api/conta/get/${pessoa.id}`, {
+            axios.get(`https://financeiro-backend.vercel.app/api/conta/get/${pessoa.id}`, {
                 headers: {
                     'bypass-tunnel-reminder': 5465,
                 },
@@ -131,7 +131,7 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
             imagem: previewImage.split(',')[previewImage.split(',').length-1]
         };
 
-        axios.put('http://192.168.3.9:3000/api/pessoa/put/' + pessoa.id, _data, {
+        axios.put('https://financeiro-backend.vercel.app/api/pessoa/put/' + pessoa.id, _data, {
             headers: {
                 'bypass-tunnel-reminder': 5465,
             },
@@ -152,7 +152,7 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
     const handleDelete = () => {
         setLoading(true)
         try{
-            axios.delete('http://192.168.3.9:3000/api/pessoa/delete/' + pessoa.id, {
+            axios.delete('https://financeiro-backend.vercel.app/api/pessoa/delete/' + pessoa.id, {
                 headers: {
                     'bypass-tunnel-reminder': 5465,
                 },
