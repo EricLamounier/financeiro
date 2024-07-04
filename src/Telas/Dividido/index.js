@@ -24,7 +24,11 @@ export default function Dividido() {
     useEffect(() => {
         setLoading(true)
         try {
-            axios.get('http://192.168.3.9:8000/api/conta/get')
+            axios.get('https://financeiro-backend.vercel.app//api/conta/get',{
+                headers: {
+                    'bypass-tunnel-reminder': 5465,
+                },
+            })
             .then((res) => {
                 setTodasContas(res.data)
                 setLoading(false)
@@ -41,10 +45,6 @@ export default function Dividido() {
     const handleData = () => {
         setContas(filtraContasPorData(todasContas, dataConsulta));
     };
-
-    const handleRadio = (e) => {
-        setSelectRadio(e.target.value)
-    }
 
     return (
         <Principal>

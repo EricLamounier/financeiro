@@ -20,7 +20,11 @@ export default function Pessoas(){
     useEffect(()=>{
         setLoading(true)
         try{
-            axios.get('http://192.168.3.9:8000/api/pessoa/get/')
+            axios.get('https://financeiro-backend.vercel.app//api/pessoa/get/',{
+                headers: {
+                    'bypass-tunnel-reminder': '124999',
+                }
+            })
             .then((res)=>{
                 setPessoas(res.data)
                 setLoading(false)
@@ -80,16 +84,15 @@ const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading }) => {
             imagem: previewImage ? previewImage.split(',')[previewImage.split(',').length-1] : null
         };
 
-        axios.post('http://192.168.3.9:8000/api/pessoa/post', _data)
-            .then((res) => {
-                setPessoas([...pessoas, res.data]);
-                setModal(false);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-                setLoading(false);
-            });
+        axios.post('https://financeiro-backend.vercel.app//api/pessoa/post',_data, {
+            headers: {
+                'bypass-tunnel-reminder': 5465,
+            },
+        }).then((res)=>{
+            setPessoas([...pessoas, res.data])
+            setModal(false)
+            setLoading(false)
+        })
     };
 
     const handleImagem = event => {
