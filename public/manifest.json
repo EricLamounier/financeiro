@@ -1,7 +1,7 @@
 {
   "theme_color": "#1d2125",
   "background_color": "#1d2125",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "https://financeiro-psi.vercel.app/",
   "start_url": "https://financeiro-psi.vercel.app/",

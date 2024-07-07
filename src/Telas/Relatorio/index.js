@@ -21,12 +21,12 @@ export default function Relatorio() {
         setLoading(true);
         try {
             const [pessoasRes, contasRes] = await Promise.all([
-                axios.get('https://financeiro-backend.vercel.app/api/pessoa/get/', {
+                axios.get('http://192.168.3.9:8080/api/pessoa/get/', {
                     headers: {
                         'bypass-tunnel-reminder': 5465,
                     },
                 }),
-                axios.get('https://financeiro-backend.vercel.app/api/conta/get/', {
+                axios.get('http://192.168.3.9:8080/api/conta/get/', {
                     headers: {
                         'bypass-tunnel-reminder': 5465,
                     },
