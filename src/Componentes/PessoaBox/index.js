@@ -1,10 +1,7 @@
 import './style.css'
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
-import { formattedNumber } from '../../Componentes/Funcoes'
 
 export function PessoaBox({pessoa}){
     const navigate = useNavigate();

@@ -25,7 +25,6 @@ export default function Consulta() {
     const [modal, setModal] = useState(false);
     const [modalEditPessoa, setModalEditPessoa] = useState(false)
     const [dataConsulta, setDataConsulta] = useState(dayjs().format('MM/YYYY'));
-    const adiciona = true;
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -115,12 +114,8 @@ export default function Consulta() {
 
 const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
     const [nome, setNome] = useState(pessoa.nome || '');
-    const [selectedFile, setSelectedFile] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [base64, setBase64Image] = useState(null);
     const navigate = useNavigate()
-
-    console.log(pessoa)
 
     const handleSave = () => {
     
@@ -170,9 +165,7 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
     const handleImagem = event => {
         const file = event.target.files[0];
     
-        if (file) {
-            setSelectedFile(file);
-    
+        if (file) {    
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewImage(reader.result);
@@ -196,7 +189,7 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
             setPreviewImage(reader.result);
         };
         reader.readAsDataURL(blob);
-    }, [])
+    }, [1])
 
     return (
         <div className='modalAddPessoa'>

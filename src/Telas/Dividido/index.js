@@ -1,6 +1,5 @@
 import './style.css'
 import axios from 'axios';
-import EqualizerIcon from '@mui/icons-material/Equalizer';
 import { useState, useEffect } from 'react';
 
 import Principal from '../../Componentes/Principal';
@@ -15,10 +14,8 @@ import Loading from '../../Componentes/Loading';
 export default function Dividido() {
     const [dataConsulta, setDataConsulta] = useState('');
     const [todasContas, setTodasContas] = useState([]);
-    const [contasDividido, setContasDividido] = useState([])
     const [contas, setContas] = useState([]);
     const [modal, setModal] = useState(false);
-    const [selectRadio, setSelectRadio] = useState('1')
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -79,7 +76,7 @@ export default function Dividido() {
             <TabelaConsulta
                 contas={contas}
                 setModal={setModal}
-                isDivididoModo={selectRadio}
+                isDivididoModo={'1'}
             />
             <BttnAdd onClick={() => setModal({ tipo: 0, conta: {tipo: 1}, titulo: 'Adicionar Despesa Dividida' })} />
         </Principal>

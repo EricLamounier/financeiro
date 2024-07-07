@@ -10,8 +10,6 @@ export default function TabelaConsulta({ contas, setModal, isDivididoModo}) {
     const [totalDespesas, setTotalDespesas] = useState(0);
     const [totalReceitas, setTotalReceitas] = useState(0);
     const [totalRecebidoPago, setTotalRecebidoPago] = useState(0)
-    const [qtdPessoas, setQtdPessoas] = useState(false)
-    const [pessoas, setPessoas] = useState([])
 
     const formateData = (dt) => {
         const newData = dt.substring(0, 10).split('-')

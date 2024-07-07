@@ -1,5 +1,5 @@
 import './style.css';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
 
 import EqualizerIcon from '@mui/icons-material/Equalizer';
@@ -14,69 +14,64 @@ export default function Relatorio() {
     const [dataConsulta, setDataConsulta] = useState('');
     const [radio, setRadio] = useState("1");
     const [pessoas, setPessoas] = useState([]);
-    const [todasContas, setTodasContas] = useState([]);
     const [contas, setContas] = useState([]);
-    const [pessoasContas, setPessoasContas] = useState([]);
-    const [dividido, setDividido] = useState(0);
-    const [totalReceitas, setTotalReceitas] = useState(0);
-    const [qtdPessoas, setQtdPessoas] = useState(0);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true)
-            try {
-                const [pessoasRes, contasRes] = await Promise.all([
-                    axios.get('https://financeiro-backend.vercel.app/api/pessoa/get/',{
-                        headers: {
-                            'bypass-tunnel-reminder': 5465,
-                        },
-                    }),
-                    axios.get('https://financeiro-backend.vercel.app/api/conta/get/',{
-                        headers: {
-                            'bypass-tunnel-reminder': 5465,
-                        },
-                    })
-                ]);
+    const fetchData = useCallback(async () => {
+        setLoading(true);
+        try {
+            const [pessoasRes, contasRes] = await Promise.all([
+                axios.get('https://financeiro-backend.vercel.app/api/pessoa/get/', {
+                    headers: {
+                        'bypass-tunnel-reminder': 5465,
+                    },
+                }),
+                axios.get('https://financeiro-backend.vercel.app/api/conta/get/', {
+                    headers: {
+                        'bypass-tunnel-reminder': 5465,
+                    },
+                })
+            ]);
 
-                const { data: pessoasData } = pessoasRes;
-                const { data: contasData } = contasRes;
-
-                setPessoas(pessoasData);
-                setTodasContas(contasData);
-                setContas(filtraContasPorData(contasData));
-
-                const pessoasComContas = pessoasData.map(pessoa => ({
-                    pessoa,
-                    contas: contasData.filter(conta => conta.pessoa_id === pessoa.id)
-                }));
-                setPessoasContas(pessoasComContas);
-                setQtdPessoas(pessoasData.length);
-
-                const totalReceitas = contasData.reduce((acc, conta) => acc + (conta.tipo ? 0 : Number(conta.valor)), 0);
-                setTotalReceitas(totalReceitas);
-                setLoading(false)
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        fetchData();
+            setPessoas(pessoasRes.data);
+            setContas(contasRes.data);
+        } catch (err) {
+            console.log(err);
+        }
+        setLoading(false);
     }, []);
 
     useEffect(() => {
-        const contasDivididas = contas.filter(conta => conta.pessoa_id === null);
-        const totalDividido = contasDivididas.reduce((acc, conta) => acc + Number(conta.valor), 0);
-        setDividido(totalDividido);
-    }, [contas, radio]);
+        fetchData();
+    }, [fetchData]);
+
+    const contasFiltradas = useMemo(() => filtraContasPorData(contas, dataConsulta), [contas, dataConsulta]);
+
+    const pessoasComContas = useMemo(() => 
+        pessoas.map(pessoa => ({
+            pessoa,
+            contas: contasFiltradas.filter(conta => conta.pessoa_id === pessoa.id)
+        })), 
+        [pessoas, contasFiltradas]
+    );
+
+    const totalReceitas = useMemo(() => 
+        contas.reduce((acc, conta) => acc + (conta.tipo ? 0 : Number(conta.valor)), 0), 
+        [contas]
+    );
+
+    const totalDividido = useMemo(() => 
+        contasFiltradas.filter(conta => conta.pessoa_id === null).reduce((acc, conta) => acc + Number(conta.valor), 0), 
+        [contasFiltradas]
+    );
 
     const handleRadio = useCallback((opt) => {
         setRadio(opt);
     }, []);
 
-    const handleData = () => {
-        // Implementar a função de manuseio de data aqui, se necessário
-    };
+    const handleData = useCallback(() => {
+        setContas(filtraContasPorData(contas, dataConsulta));
+    }, [contas, dataConsulta]);
 
     return (
         <Principal className='relatorio'>
@@ -86,9 +81,7 @@ export default function Relatorio() {
                 formato={'MM/YYYY'}
             />
 
-            {
-                loading && (<Loading />)
-            }
+            {loading && (<Loading />)}
 
             <div className='divCalculo'>
                 <div>
@@ -123,14 +116,14 @@ export default function Relatorio() {
                 <EqualizerIcon className='graphIcon' />
             </div>
 
-            {pessoasContas.map((pc, index) => (
+            {pessoasComContas.map((pc, index) => (
                 <PessoaRelatorio
                     key={index}
                     dados={pc}
-                    totalDividido={dividido}
+                    totalDividido={totalDividido}
                     totalReceitas={totalReceitas}
                     modoDivisao={radio}
-                    qtdPessoas={qtdPessoas}
+                    qtdPessoas={pessoas.length}
                 />
             ))}
         </Principal>

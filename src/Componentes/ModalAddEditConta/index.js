@@ -97,7 +97,6 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
 
     useEffect(()=>{
 
-        console.log(tipo)
         if(Number(tipo) === 0){
             setSituacoes({
                 0: 'Pendente',

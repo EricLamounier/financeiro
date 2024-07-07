@@ -4,7 +4,7 @@ import 'dayjs/locale/pt-br';
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { useEffect, useState } from 'react';
 dayjs.locale('pt-br');
 
@@ -25,7 +25,7 @@ export default function DataPicker({ setData, data, formato }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoItem sx={{ width: '100%', zIndex: 1 }}>
-          <DesktopDatePicker
+          <MobileDatePicker
             value={selectedDate}
             views={formato === 'MM/YYYY' ? ['year', 'month'] : ['year', 'month', 'day']}
             onChange={handleDateChange}

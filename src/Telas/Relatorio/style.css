@@ -48,3 +48,7 @@
     padding: 2px;
     border-radius: 2px;
 }
+
+.divCalculo .divCalculoModos label {
+    font-size: 15px;
+}

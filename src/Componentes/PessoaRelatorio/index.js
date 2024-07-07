@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { formattedNumber } from '../../utils';
 
 export default function PessoaRelatorio({ dados, totalDividido, totalReceitas, modoDivisao, qtdPessoas }) {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
     const [receitas, setReceitas] = useState(0);
     const [despesasInd, setDespesasInd] = useState(0);
     const [despesasDivididas, setDespesasDivididas] = useState(totalDividido || 0);
@@ -71,7 +71,7 @@ export default function PessoaRelatorio({ dados, totalDividido, totalReceitas, m
                     <p>{formattedNumber(despesasInd)}</p>
                 </div>
                 <div className='div' style={{color: '#FFA9A9'}}>
-                    <p>(-) Despesas Divididas | A repassar</p>
+                    <p>(-) Despesas Divididas | A repassar <span>({porcentagem})</span></p>
                     <p>{formattedNumber(despesasDivididas)}</p>
                 </div>
                 <div className='div'>

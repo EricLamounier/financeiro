@@ -27,7 +27,6 @@ export default function Pessoas(){
             })
             .then((res)=>{
                 setPessoas(res.data)
-                console.log(res.data)
                 setLoading(false)
             })
         }catch(err){
@@ -73,9 +72,7 @@ export default function Pessoas(){
 
 const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading }) => {
     const [nome, setNome] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
-    const [base64, setBase64Image] = useState(null)
 
     const handleSave = () => {
     
@@ -92,7 +89,6 @@ const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading }) => {
             },
         }).then((res)=>{
             setPessoas([...pessoas, res.data])
-            console.log(res.data)
             setModal(false)
             setLoading(false)
         }).catch(e=>{
@@ -103,9 +99,7 @@ const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading }) => {
     const handleImagem = event => {
         const file = event.target.files[0];
     
-        if (file) {
-            setSelectedFile(file);
-    
+        if (file) {    
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreviewImage(reader.result);
