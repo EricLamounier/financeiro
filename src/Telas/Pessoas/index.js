@@ -10,12 +10,14 @@ import Principal from '../../Componentes/Principal'
 import { PessoaBox } from '../../Componentes/PessoaBox'
 import { BttnAdd, BttnSalvar } from '../../Componentes/Botoes'
 import Loading from '../../Componentes/Loading';
+import ModalMensagem from '../../Componentes/ModalMensagem';
 
 export default function Pessoas(){
 
     const [pessoas, setPessoas] = useState([])
     const [modal, setModal] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [modalMensagem, setModalMensagem] = useState(false)
 
     useEffect(()=>{
         setLoading(true)
@@ -28,6 +30,11 @@ export default function Pessoas(){
             .then((res)=>{
                 setPessoas(res.data)
                 setLoading(false)
+            })
+            .catch(err=>{
+                console.log(err.message)
+                setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
+                setLoading(false);
             })
         }catch(err){
             console.log(err)
@@ -51,6 +58,7 @@ export default function Pessoas(){
                             setModal={setModal}
                             pessoas={pessoas}
                             setLoading={setLoading}
+                            setModalMensagem={setModalMensagem}
                         />
                     </Modal>
                 )
@@ -63,6 +71,14 @@ export default function Pessoas(){
                     />
                 ))
             }
+            {
+                modalMensagem && (
+                    <ModalMensagem 
+                        setModalMensagem={setModalMensagem}
+                        mensagem={modalMensagem}
+                    />
+                )
+            }
             <BttnAdd
                 onClick={()=>setModal(1)}
             />
@@ -70,7 +86,7 @@ export default function Pessoas(){
     )
 }
 
-const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading }) => {
+const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading, setModalMensagem }) => {
     const [nome, setNome] = useState('');
     const [previewImage, setPreviewImage] = useState(null);
 
@@ -83,17 +99,23 @@ const ModalAddPessoa = ({ setPessoas, pessoas, setModal, setLoading }) => {
             imagem: previewImage ? previewImage.split(',')[previewImage.split(',').length-1] : null
         };
 
+        console.log(_data.imagem)
+
         axios.post('https://financeiro-backend.vercel.app/api/pessoa/post',_data, {
             headers: {
                 'bypass-tunnel-reminder': 5465,
             },
         }).then((res)=>{
+            console.log(res.data)
             setPessoas([...pessoas, res.data])
             setModal(false)
             setLoading(false)
+            setModalMensagem({mensagem: 'Pessoa adicionada com sucesso!', tipo: 'ok'})
         }).catch(e=>{
             setLoading(false);
+            setModalMensagem({mensagem: 'Erro do servidor: ' + e.message, tipo: 'erro'})
         })
+        setPreviewImage(null)
     };
 
     const handleImagem = event => {

@@ -9,6 +9,7 @@ import FiltroData from '../../Componentes/FiltroData';
 import PessoaRelatorio from '../../Componentes/PessoaRelatorio';
 import { filtraContasPorData } from '../../utils';
 import Loading from '../../Componentes/Loading';
+import ModalMensagem from '../../Componentes/ModalMensagem';
 
 export default function Relatorio() {
     const [dataConsulta, setDataConsulta] = useState('');
@@ -16,6 +17,7 @@ export default function Relatorio() {
     const [pessoas, setPessoas] = useState([]);
     const [contas, setContas] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [modalMensagem, setModalMensagem] = useState(false)
 
     const fetchData = useCallback(async () => {
         setLoading(true);
@@ -36,7 +38,7 @@ export default function Relatorio() {
             setPessoas(pessoasRes.data);
             setContas(contasRes.data);
         } catch (err) {
-            console.log(err);
+            setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
         }
         setLoading(false);
     }, []);
@@ -80,6 +82,15 @@ export default function Relatorio() {
                 onClick={handleData}
                 formato={'MM/YYYY'}
             />
+
+            {
+                modalMensagem && (
+                    <ModalMensagem 
+                        setModalMensagem={setModalMensagem}
+                        mensagem={modalMensagem}
+                    />
+                )
+            }
 
             {loading && (<Loading />)}
 

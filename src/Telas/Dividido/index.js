@@ -10,6 +10,7 @@ import FiltroData from '../../Componentes/FiltroData';
 import ModalAddEditConta from '../../Componentes/ModalAddEditConta';
 import { filtraContasPorData } from '../../utils'
 import Loading from '../../Componentes/Loading';
+import ModalMensagem from '../../Componentes/ModalMensagem';
 
 export default function Dividido() {
     const [dataConsulta, setDataConsulta] = useState('');
@@ -17,6 +18,7 @@ export default function Dividido() {
     const [contas, setContas] = useState([]);
     const [modal, setModal] = useState(false);
     const [loading, setLoading] = useState(false)
+    const [modalMensagem, setModalMensagem] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -29,10 +31,14 @@ export default function Dividido() {
             .then((res) => {
                 setTodasContas(res.data)
                 setLoading(false)
-            });
+            }).catch(err=>{
+                setLoading(false)
+                setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
+            })
         } catch (err) {
             console.log(err);
             setLoading(false)
+            setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
         }
     }, []);
 
@@ -54,6 +60,14 @@ export default function Dividido() {
             {
                 loading && (<Loading />)
             }
+            {
+                modalMensagem && (
+                    <ModalMensagem 
+                        setModalMensagem={setModalMensagem}
+                        mensagem={modalMensagem}
+                    />
+                )
+            }
 
             {modal && (
                 <Modal 
@@ -70,6 +84,7 @@ export default function Dividido() {
                         setTodasContas={setTodasContas}
                         isDespesa={true}
                         setLoading={setLoading}
+                        setModalMensagem={setModalMensagem}
                     />
                 </Modal>
             )}
@@ -78,7 +93,7 @@ export default function Dividido() {
                 setModal={setModal}
                 isDivididoModo={'1'}
             />
-            <BttnAdd onClick={() => setModal({ tipo: 0, conta: {tipo: 1}, titulo: 'Adicionar Despesa Dividida' })} />
+            <BttnAdd onClick={() => setModal({ tipo: 0, conta: {}, titulo: 'Adicionar Despesa Dividida' })} />
         </Principal>
     );
 }

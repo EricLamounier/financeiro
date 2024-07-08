@@ -1,0 +1,57 @@
+.modalMensagem {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    border-radius: 5px;
+    z-index: 5;
+    max-width: 290px;
+    min-height: 20px;
+    overflow: hidden;
+    padding: 5px;
+    transition: 0.2s;
+}
+
+/* Desativado enquando nao eh desenvolvido a mensagem de retorno
+.modalMensagem .modalMensagemLine {
+    width: 100%;
+    height: 1px;
+    background-color: #881C59;
+}
+
+.modalMensagem .modalMensagemButton {
+    width: calc(100% - 5px);
+    padding: 5px 0;
+    margin: 5px 0;
+    background-color: #881C59;
+    color: #F8D7DA;
+    padding-left: 5px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalMensagem .modalMensagemRetorno {
+    width: calc(100% - 6px);
+    border: 1px solid #ffb4ba;
+    padding: 2px;
+    background-color: #fcc3c8;
+    border-radius: 2px;
+}*/
+
+.modalMensagem.ok {
+    background-color: #D4EDDA;
+    border: 2px solid #C3E6CB;
+    color: #155724
+}
+
+.modalMensagem.erro {
+    background-color: #F8D7DA;
+    border: 2px solid #fab8bf;
+    color: #881C59;
+}
+
+.modalMensagem.atencao {
+    background-color: #FFF3CD;
+    border: 2px solid #FFEEBA;
+    color: #956445;
+}

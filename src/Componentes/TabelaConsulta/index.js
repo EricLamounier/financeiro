@@ -26,7 +26,7 @@ export default function TabelaConsulta({ contas, setModal, isDivididoModo}) {
         let total = 0
 
         contas.forEach(conta => {
-            if (conta.tipo) {
+            if (Number(conta.tipo)) {
                 despesasTemp.push(conta);
                 totalDespesas += Number(conta.valor);
 

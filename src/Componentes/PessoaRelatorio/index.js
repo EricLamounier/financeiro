@@ -42,7 +42,7 @@ export default function PessoaRelatorio({ dados, totalDividido, totalReceitas, m
             setRestante(formattedNumber(Number(receitas) - (Number(despesasInd) + despesasRateio)));
         } else { // Igual
             const despesasIgual = totalDividido / qtdPessoas;
-            setPorcentagem((despesasIgual / 100 * 100).toFixed(2) + '%');
+            setPorcentagem('50%');
             setDespesasDivididas(despesasIgual);
             setRestante(formattedNumber(Number(receitas) - (Number(despesasInd) + despesasIgual)));
         }

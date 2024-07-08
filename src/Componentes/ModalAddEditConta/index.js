@@ -5,7 +5,7 @@ import DataPicker from '../DataPicker';
 import Seletor from '../Seletor';
 import { BttnExcluir, BttnSalvar } from '../Botoes';
 
-export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, contas, todasContas, setContas, setModal, setLoading, showTipo }) {
+export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, contas, todasContas, setContas, setModal, setLoading, showTipo, setModalMensagem }) {
 
     const optionsTipoConta = {
         0: 'Receitas',
@@ -20,12 +20,11 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
     const [nome, setNome] = useState(dados.conta.nome || '');
     const [valor, setValor] = useState(dados.conta.valor || '');
     const [data, setData] = useState(dados.conta.data || '');
-    const [tipo, setTipo] = useState(dados.conta.tipo || 0);
+    const [tipo, setTipo] = useState(dados.conta.tipo || 1);
     const [situacoes, setSituacoes] = useState(optionsSituacao)
     const [situacao, setSituacao] = useState(dados.conta.situacao !== undefined ? dados.conta.situacao : 1);
 
     const formataDataParaBanco = (dt) => dt.split('/').reverse().join('-');
-
     const handleSave = () => {
 
         setLoading(true)
@@ -48,8 +47,13 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
                 })
                 .then((res) => {
                     const updateTodasContas = todasContas.map(c => c.id === dados.conta.id ? res.data.conta : c);
+                    console.log(updateTodasContas)
                     setTodasContas(updateTodasContas);
                     setModal(false);
+                    setLoading(false)
+                    setModalMensagem({mensagem: 'Conta atualizada com sucesso!', tipo: 'ok'})
+                }).catch(err=>{
+                    setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
                     setLoading(false)
                 });
             } catch (err) {
@@ -65,7 +69,17 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
                 })
                 .then((res) => {
                     setTodasContas([...todasContas, res.data]);
+                    console.log([...todasContas, res.data])
                     setModal(false);
+                    setLoading(false);
+                    setModalMensagem({mensagem: 'Conta adicionada com sucesso!', tipo: 'ok'})
+                })
+                .catch(err=>{
+                    setLoading(false);
+                    setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
+                })
+                .catch(err=>{
+                    setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
                     setLoading(false)
                 });
             } catch (err) {
@@ -87,6 +101,11 @@ export default function ModalAddEditConta ({ pessoa, dados, setTodasContas, cont
                 setContas(contas.filter(c => c.id !== dados.conta.id));
                 setTodasContas(todasContas.filter(c => c.id !== dados.conta.id))
                 setModal(false);
+                setLoading(false)
+                setModalMensagem({mensagem: 'Conta apagada com sucesso!', tipo: 'ok'})
+            })
+            .catch(err=>{
+                setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
                 setLoading(false)
             });
         } catch (err) {

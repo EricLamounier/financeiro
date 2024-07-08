@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 import { filtraContasPorData } from '../../utils'
 import InputBox from '../InputBox';
 import Loading from '../Loading';
+import ModalMensagem from '../ModalMensagem';
 
 export default function Consulta() {
     const location = useLocation();
@@ -26,6 +27,7 @@ export default function Consulta() {
     const [modalEditPessoa, setModalEditPessoa] = useState(false)
     const [dataConsulta, setDataConsulta] = useState(dayjs().format('MM/YYYY'));
     const [loading, setLoading] = useState(false)
+    const [modalMensagem, setModalMensagem] = useState(false)
 
     useEffect(() => {
         setLoading(true)
@@ -39,6 +41,10 @@ export default function Consulta() {
                 setTodasContas(res.data);
                 setContas(filtraContasPorData(res.data));
                 setLoading(false)
+            })
+            .catch(err=>{
+                setLoading(false)
+                setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
             });
         } catch (err) {
             console.log(err);
@@ -64,6 +70,14 @@ export default function Consulta() {
             {
                 loading && (<Loading />)
             }
+            {
+                modalMensagem && (
+                    <ModalMensagem 
+                        setModalMensagem={setModalMensagem}
+                        mensagem={modalMensagem}
+                    />
+                )
+            }
             <Header
                 contas={contas}
                 pessoa={pessoa}
@@ -80,6 +94,7 @@ export default function Consulta() {
                             setPessoa={setPessoa}
                             setLoading={setLoading}
                             setModal={setModalEditPessoa}
+                            setModalMensagem={setModalMensagem}
                         />
                     </Modal>
                 )
@@ -100,6 +115,7 @@ export default function Consulta() {
                         isDespesa={false}
                         showTipo={true}
                         setLoading={setLoading}
+                        setModalMensagem={setModalMensagem}
                     />
                 </Modal>
             )}
@@ -112,7 +128,7 @@ export default function Consulta() {
     );
 }
 
-const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
+const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading, setModalMensagem }) => {
     const [nome, setNome] = useState(pessoa.nome || '');
     const [previewImage, setPreviewImage] = useState('');
     const navigate = useNavigate()
@@ -131,17 +147,17 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
                 'bypass-tunnel-reminder': 5465,
             },
         })
-            .then((res) => {
-                setPessoa(res.data);
-                setModal(false);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-                setLoading(false);
-                
-            });
-
+        .then((res) => {
+            setPessoa(res.data);
+            setModal(false);
+            setLoading(false);
+            setModalMensagem({mensagem: 'Pessoa atualizada com sucesso!', tipo: 'ok'})
+        })
+        .catch((err) => {
+            setLoading(false);
+            console.log('oioio')
+            setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
+        });
     };
 
     const handleDelete = () => {
@@ -153,8 +169,14 @@ const ModalEditPessoa = ({pessoa, setPessoa, setModal, setLoading }) => {
                 },
             })
             .then((res)=>{
+                setModalMensagem({mensagem: 'Pessoa apagada com sucesso!', tipo: 'ok'})
                 navigate('/')
                 setLoading(false);
+                
+            })
+            .catch(err=>{
+                setLoading(false);
+                setModalMensagem({mensagem: 'Erro do servidor: ' + err.message, tipo: 'erro'})
             })
         }catch(err){
             console.log(err)
